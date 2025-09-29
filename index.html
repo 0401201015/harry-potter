@@ -1,43 +1,319 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Título do Seu Site</title>
-    </head>
+    <title>O Mundo Mágico de Harry Potter</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #f4f4f4;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(45deg, #8b0000, #daa520, #000080, #006400);
+            background-size: 400% 400%;
+            animation: magicGradient 8s ease-in-out infinite;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        @keyframes magicGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ffd700, #ffffff, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .houses-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .house-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .house-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 15px;
+            padding: 2px;
+            background: linear-gradient(45deg, var(--house-color), transparent, var(--house-color));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: exclude;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+        }
+
+        .gryffindor { --house-color: #740001; }
+        .slytherin { --house-color: #1a472a; }
+        .ravenclaw { --house-color: #0e1a40; }
+        .hufflepuff { --house-color: #ecb939; }
+
+        .house-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .house-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .house-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--house-color);
+        }
+
+        .house-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .links-section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
+            backdrop-filter: blur(15px);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .link-card {
+            background: linear-gradient(135deg, rgba(139,0,0,0.2), rgba(218,165,32,0.2));
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,215,0,0.3);
+        }
+
+        .link-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(255,215,0,0.2);
+            border-color: #ffd700;
+        }
+
+        .link-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        .link-description {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .magic-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #8b0000, #daa520);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .magic-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .magic-button:hover::before {
+            left: 100%;
+        }
+
+        .magic-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(139,0,0,0.4);
+            border-color: #ffd700;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255,215,0,0.3);
+            margin-top: 50px;
+        }
+
+        .magic-wand {
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .houses-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
 <body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">⚡ Harry Potter ⚡</h1>
+            <p class="subtitle">Bem-vindos ao Mundo Mágico de Hogwarts</p>
+        </header>
 
-    <header>
-        <h1>Bem-vindo ao Meu Site!</h1>
-        <nav>
-            <ul>
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </nav>
-    </header>
+        <section class="houses-section">
+            <div class="house-card gryffindor">
+                <span class="house-icon">🦁</span>
+                <h3 class="house-name">Grifinória</h3>
+                <p class="house-description">Casa da coragem, ousadia e cavalheirismo. Lar de Harry Potter, Hermione Granger e Ron Weasley.</p>
+            </div>
 
-    <main>
-        <section id="inicio">
-            <h2>Página Principal</h2>
-            <p>Este é o conteúdo principal da sua página. Você pode adicionar texto, imagens, vídeos, etc., aqui.</p>
-            </section>
+            <div class="house-card slytherin">
+                <span class="house-icon">🐍</span>
+                <h3 class="house-name">Sonserina</h3>
+                <p class="house-description">Casa da ambição, astúcia e determinação. Conhecida por produzir bruxos poderosos e determinados.</p>
+            </div>
 
-        <section id="sobre">
-            <h2>Sobre Nós</h2>
-            <p>Conte um pouco sobre sua empresa, projeto ou sobre você.</p>
+            <div class="house-card ravenclaw">
+                <span class="house-icon">🦅</span>
+                <h3 class="house-name">Corvinal</h3>
+                <p class="house-description">Casa da sabedoria, inteligência e criatividade. Valoriza o aprendizado e o conhecimento acima de tudo.</p>
+            </div>
+
+            <div class="house-card hufflepuff">
+                <span class="house-icon">🦡</span>
+                <h3 class="house-name">Lufa-Lufa</h3>
+                <p class="house-description">Casa da lealdade, paciência e trabalho árduo. Conhecida por aceitar todos com bondade e justiça.</p>
+            </div>
         </section>
 
-        <section id="contato">
-            <h2>Entre em Contato</h2>
-            <p>Detalhes de contato ou um formulário podem vir aqui.</p>
+        <section class="links-section">
+            <h2 class="section-title">🎬 Documentários & Curiosidades</h2>
+            
+            <div class="links-grid">
+                <div class="link-card">
+                    <h3 class="link-title">📺 Documentários Oficiais</h3>
+                    <p class="link-description">Explore os bastidores dos filmes com documentários exclusivos sobre a criação do mundo mágico.</p>
+                    <a href="https://www.youtube.com/results?search_query=harry+potter+documentary+behind+the+scenes" target="_blank" rel="noopener noreferrer" class="magic-button">Assistir Documentários</a>
+                </div>
+
+                <div class="link-card">
+                    <h3 class="link-title">🏰 Tour Virtual Hogwarts</h3>
+                    <p class="link-description">Faça um tour virtual pelos estúdios onde Harry Potter foi filmado e conheça os cenários reais.</p>
+                    <a href="https://www.wbstudiotour.co.uk/virtual-tour/" target="_blank" rel="noopener noreferrer" class="magic-button">Explorar Hogwarts</a>
+                </div>
+
+                <div class="link-card">
+                    <h3 class="link-title">📚 Curiosidades Mágicas</h3>
+                    <p class="link-description">Descubra fatos incríveis e segredos sobre os livros e filmes que você nunca soube.</p>
+                    <a href="https://www.buzzfeed.com/br/harrypotter" target="_blank" rel="noopener noreferrer" class="magic-button">Ver Curiosidades</a>
+                </div>
+
+                <div class="link-card">
+                    <h3 class="link-title">🎭 Elenco e Bastidores</h3>
+                    <p class="link-description">Conheça mais sobre os atores e as histórias por trás das câmeras durante as filmagens.</p>
+                    <a href="https://www.youtube.com/results?search_query=harry+potter+cast+interviews+behind+scenes" target="_blank" rel="noopener noreferrer" class="magic-button">Conhecer o Elenco</a>
+                </div>
+
+                <div class="link-card">
+                    <h3 class="link-title">🧙‍♂️ Mundo Bruxo Oficial</h3>
+                    <p class="link-description">Site oficial do Mundo Bruxo com notícias, jogos e conteúdo exclusivo sobre Harry Potter.</p>
+                    <a href="https://www.wizardingworld.com/" target="_blank" rel="noopener noreferrer" class="magic-button">Entrar no Mundo Bruxo</a>
+                </div>
+
+                <div class="link-card">
+                    <h3 class="link-title">🎵 Trilha Sonora Mágica</h3>
+                    <p class="link-description">Ouça as músicas icônicas compostas por John Williams que marcaram a saga.</p>
+                    <a href="https://www.youtube.com/results?search_query=harry+potter+soundtrack+john+williams" target="_blank" rel="noopener noreferrer" class="magic-button">Ouvir Trilhas</a>
+                </div>
+            </div>
         </section>
-    </main>
 
-    <footer>
-        <p>&copy; 2025 Seu Nome ou Nome da Empresa. Todos os direitos reservados.</p>
-    </footer>
-
-</body>
+        <footer class="footer">
+            <p><span class="magic-wand">🪄</span> "A felicidade pode ser encontrada até nos momentos mais sombrios, se nos lembrarmos de acender a luz." - Albus Dumbledore <span class="magic-wand">🪄</span></p>
+        </footer>
+    </div>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'986c8ea391743246',t:'MTc1OTE2MDE5Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
